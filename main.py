@@ -3,9 +3,6 @@ from aiogram import Bot, Dispatcher
 import logging
 from config_data.config import Config, load_config
 from handlers import handlers
-#from flask import Flask, request
-#app = Flask(__name__)
-#WEBHOOK_URL = ''
 
 # Настройка логирования
 logging.basicConfig(
@@ -25,7 +22,6 @@ async def main() -> None:
     # Пропускаем накопившиеся апдейты и запускаем polling
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
-    #app.run(host='0.0.0.0', port=8443)
 
 
 if __name__ == '__main__':

@@ -41,7 +41,7 @@ async def buttons_redirect(user_id: int, call):
         await bot.send_message(call.message.chat.id, "Отправьте ссылку на товар")
         await set_state(user_id, UserState.ADD)
 
-    # Удаление товара их отслеживания
+    # Удаление товара из отслеживания
     if call.data == "choice_del":
         if await check_list(call.message.chat.id):
             await bot.send_message(call.message.chat.id, "Напиши id товара, которое надо удалить")
@@ -127,7 +127,7 @@ async def check_product(message: Message):
             await bot.send_message(message.chat.id, "У Вас нет такого ID.\nВведите ID снова или", reply_markup=keyboard)
 
 
-
+# Удаление отслеживаемого товара
 async def del_product(message: Message):
     user_id = message.from_user.id
     try:
@@ -158,6 +158,8 @@ async def del_product(message: Message):
             keyboard = InlineKeyboardMarkup(inline_keyboard=[[button]])
             await bot.send_message(message.chat.id, "У Вас нет такого ID.\nВведите ID снова или", reply_markup=keyboard)
 
+
+# Добавление товара
 async def add_product(message):
     user_id = message.from_user.id
     url = message.text
@@ -186,6 +188,7 @@ async def add_product(message):
         await show_buttons(user_id)
 
 
+# Проверка с перерывом в час, не изменилась ли стоимость товаров
 async def run_scheduler():
     while True:
         cursor = connection.cursor()
@@ -220,5 +223,5 @@ def start_scheduler():
     asyncio.set_event_loop(loop)
     loop.run_until_complete(run_scheduler())
 
-#scheduler_thread = threading.Thread(target=start_scheduler)
-#scheduler_thread.start()
+scheduler_thread = threading.Thread(target=start_scheduler)
+scheduler_thread.start()

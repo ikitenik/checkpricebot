@@ -24,17 +24,17 @@ async def callback_worker(call: CallbackQuery):
     user_id = call.from_user.id
     await buttons_redirect(user_id, call)
 
-
+# Обработчик проверки текущей стоимости товара
 @router.message(StateFilter(UserState.CHECK))
 async def handle_check(message: Message):
     await check_product(message)
 
-
+# Обработчик удаления товара из отслеживаемых
 @router.message(StateFilter(UserState.DEL))
 async def handle_del(message: Message):
     await del_product(message)
 
-
+# Обработчик добавления товара
 @router.message(StateFilter(UserState.ADD))
 async def handle_add(message: Message):
     await add_product(message)

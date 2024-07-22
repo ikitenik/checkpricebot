@@ -3,7 +3,6 @@ import aiosqlite
 config: Config = load_config()
 
 
-
 # Проверка, есть ли пользователь в базе данных
 async def check_new_user(user_id : int) -> bool:
     async with aiosqlite.connect(config.db.database) as connection:

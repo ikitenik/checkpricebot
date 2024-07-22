@@ -8,14 +8,14 @@ class UserState:
     DEL = 2
     CHECK = 3
 
-
+# Добавить состояние в бд
 async def set_state(user_id, state):
     async with aiosqlite.connect(config.db.database) as connection:
         async with connection.execute('UPDATE users SET state = ? WHERE id = ?',
                    (state, user_id)):
             await connection.commit()
 
-
+# Получить состояние из бд
 async def get_state(user_id):
     async with aiosqlite.connect(config.db.database) as connection:
         async with connection.execute('select state from users where id = ?', (user_id,)) as cursor:

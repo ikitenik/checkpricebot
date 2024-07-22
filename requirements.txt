@@ -1,3 +1,5 @@
-telebot~=0.0.5
-flask~=3.0.3
-sqlite3-api~=2.0.4
+aiosqlite~=2.0.4
+aiogram~=3.8.0
+environs~=11.0.0
+schedule~=1.2.2
+selenium~=4.22.0
